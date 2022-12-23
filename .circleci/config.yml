@@ -26,6 +26,9 @@ jobs:
         at: /tmp/workspace
     - run:
         command: "go build -o /tmp/workspace/runme /tmp/workspace/main.go"
+    - persist_to_workspace:
+        root: /tmp/workspace
+        paths: [runme]
     
   run:
     resource_class: small
