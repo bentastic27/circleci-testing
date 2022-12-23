@@ -10,6 +10,9 @@ jobs:
     - image: cimg/base:stable
     steps:
     - checkout
+    - persist_to_workspace:
+        root: "."
+        paths: [main.go]
     - run:
         command: "find ."
     
@@ -19,8 +22,10 @@ jobs:
     - image: cimg/base:stable
     steps:
     - go/install
+    - attach_workspace:
+        at: /tmp/workspace
     - run:
-        command: "go build -o runme main.go"
+        command: "go build -o runme /tmp/workspace/main.go"
     
   run:
     resource_class: small
