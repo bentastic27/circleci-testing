@@ -17,7 +17,10 @@ jobs:
       - checkout
       - run:
           name: "Say hello"
-          command: "echsdfaso Hello, World! > /dev/stderr"
+          command: "echo Hello, World!"
+      - run:
+          name: "find stuff"
+          command: "find ."
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
@@ -25,3 +28,5 @@ workflows:
   say-hello-workflow:
     jobs:
       - say-hello
+
+# VS Code Extension Version: 1.5.0
