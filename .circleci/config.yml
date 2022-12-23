@@ -25,15 +25,17 @@ jobs:
     - attach_workspace:
         at: /tmp/workspace
     - run:
-        command: "go build -o runme /tmp/workspace/main.go"
+        command: "go build -o /tmp/workspace/runme /tmp/workspace/main.go"
     
   run:
     resource_class: small
     docker:
       - image: cimg/base:stable
     steps:
+    - attach_workspace:
+        at: /tmp/workspace
     - run:
-        command: "./runme"
+        command: "/tmp/workspace/runme"
 
 workflows:
   checkout-and-build:
