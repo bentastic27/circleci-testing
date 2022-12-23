@@ -1,5 +1,8 @@
 version: 2.1
 
+orbs:
+  go: circleci/go@1.7.1
+
 jobs:
   checkout-and-list:
     resource_class: small
@@ -15,13 +18,25 @@ jobs:
     docker:
     - image: cimg/base:stable
     steps:
+    - go/install
     - run:
-        command: "echo build here"
+        command: "go build main.go -o runme"
+    
+  run:
+    resource_class: small
+    docker:
+      - image: cimg/base:stable
+    steps:
+    - run:
+        command: "./runme"
 
 workflows:
-  say-hello-workflow:
+  checkout-and-build:
     jobs:
       - checkout-and-list
       - build:
           requires:
             - checkout-and-list
+      - run:
+          requires:
+            - build
