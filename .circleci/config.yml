@@ -39,6 +39,8 @@ jobs:
         at: /tmp/workspace
     - run:
         command: "/tmp/workspace/runme"
+    - store_artifacts:
+        path: "/tmp/workspace/runme"
 
 workflows:
   checkout-and-build:
