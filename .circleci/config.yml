@@ -20,7 +20,7 @@ jobs:
     steps:
     - go/install
     - run:
-        command: "go build main.go -o runme"
+        command: "go build -o runme main.go"
     
   run:
     resource_class: small
